@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mares de Morro | Gravadora de Trap & Funk</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset & Fonts */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+        
+        body {
+            background-color: #0a0e17;
+            color: #fff;
+            overflow-x: hidden;
+            background-image: url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+        
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: rgba(10, 14, 23, 0.95);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(90deg, #8E54E9, #4776E6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: none;
+        }
+        
+        .mobile-menu-btn {
+            color: white;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 14, 23, 0.98);
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 99;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .mobile-menu.active {
+            display: flex;
+        }
+        
+        .mobile-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px;
+            transition: 0.3s;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .mobile-menu a:hover {
+            color: #8E54E9;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(10, 14, 23, 0.7), rgba(10, 14, 23, 0.7));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #8E54E9, #4776E6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 5px 15px rgba(142, 84, 233, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            background: linear-gradient(90deg, #8E54E9, #4776E6);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(142, 84, 233, 0.4);
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(142, 84, 233, 0.6);
+        }
+        
+        /* Artists Section */
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(90deg, #8E54E9, #4776E6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-top: 100px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+        
+        .artist-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 0 5% 50px;
+        }
+        
+        .artist-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .artist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(142, 84, 233, 0.3);
+            border: 1px solid rgba(142, 84, 233, 0.3);
+        }
+        
+        .artist-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .artist-info {
+            padding: 20px;
+        }
+        
+        .artist-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #8E54E9;
+        }
+        
+        .artist-info .genre {
+            color: #4776E6;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+            font-size: 0.9rem;
+        }
+        
+        .artist-info p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 15px;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #8E54E9;
+            transform: translateY(-2px);
+        }
+        
+        /* Video Gallery */
+        .video-gallery {
+            padding: 0 5% 50px;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .video-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(142, 84, 233, 0.3);
+            border: 1px solid rgba(142, 84, 233, 0.3);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-info {
+            padding: 15px;
+        }
+        
+        .video-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .video-info p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(10, 14, 23, 0.95);
+            padding: 40px 5% 30px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .footer-logo {
+            font-size: 22px;
+            font-weight: 900;
+            background: linear-gradient(90deg, #8E54E9, #4776E6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+        
+        .footer-links a:hover {
+            color: #8E54E9;
+        }
+        
+        .social-links-footer {
+            margin-bottom: 25px;
+        }
+        
+        .social-links-footer a {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.3rem;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+        
+        .social-links-footer a:hover {
+            color: #8E54E9;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 768px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+            
+            .nav-links {
+                display: flex;
+            }
+            
+            .nav-links a {
+                color: rgba(255,255,255,0.8);
+                text-decoration: none;
+                margin-left: 25px;
+                font-weight: 600;
+                transition: 0.3s;
+                font-size: 0.95rem;
+            }
+            
+            .nav-links a:hover {
+                color: #8E54E9;
+            }
+            
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .artist-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-links {
+                flex-direction: row;
+                justify-content: center;
+                gap: 30px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hero h1 {
+                font-size: 4rem;
+            }
+            
+            .artist-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .video-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">Mares de Morro</div>
+        <div class="nav-links">
+            <a href="#home">Início</a>
+            <a href="#artists">Artistas</a>
+            <a href="#videos">Clipes</a>
+            <a href="#contact">Contato</a>
+        </div>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+    
+    <div class="mobile-menu">
+        <a href="#home">Início</a>
+        <a href="#artists">Artistas</a>
+        <a href="#videos">Clipes</a>
+        <a href="#contact">Contato</a>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>MARES DE MORRO</h1>
+        <p>A nova era do Trap e Funk começa aqui.</p>
+        <button class="cta-button">OUÇA AGORA</button>
+    </section>
+    
+    <!-- Artists Section -->
+    <h2 class="section-title" id="artists">NOSSOS ARTISTAS</h2>
+    <div class="artist-grid">
+        <div class="artist-card">
+            <img src="/os2.jpg">
+            <div class="artist-info">
+                <h3>OSanntt</h3>
+                <span class="genre">Trap</span>
+                <p>(Biografia será adicionad em breve</p>
+                <div class="social-links">
+                    <a href="https://www.youtube.com/@osanntmd"><i class="fab fa-youtube"></i></a>
+                    <a href="https://open.spotify.com/intl-pt/artist/7m7WCUhbrCJ0oIQOeSF4rN?si=UYpVfdcbQ7itOzRScwAhBg&nd=1&utm_medium=organic&product=open&%24full_url=https%3A%2F%2Fopen.spotify.com%2Fartist%2F7m7WCUhbrCJ0oIQOeSF4rN%3Fsi%3DUYpVfdcbQ7itOzRScwAhBg&feature=organic&_branch_match_id=1292175954913814057&_branch_referrer=H4sIAAAAAAAAA72N0QqCMBiFn2ZeaqkkBBJlCHWRWFR0Fdvc3HBu499E6qJnz4JeITgXh%2FPxcYT31i2jyFnjJX%2BE2NpQSd1FKwumGajPjWU6QHHKB6XuA6hcfBSUrFFcTvng8GdT008TBi%2Bdn0rWZ9fiLAgU%2B5nZ1RU7lSkcUFI6iZLt%2BWYvvKGkzqSvnscTHddi036vsFIE0%2B4Pdyhe6Gai84Az7AdguYEWa0mDFzDOAKRu7wTM6BjkhQDTszcjPwdeMwEAAA%3D%3D"><i class="fab fa-spotify"></i></a>
+                    <a href="https://www.instagram.com/osanntt?igsh=MXhxMnRteGh0cGRqaQ=="><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        
+     <!--   <div class="artist-card">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="DJ Maré">
+            <div class="artist-info">
+                <h3>MC Ally</h3>
+                <span class="genre">Funk</span>
+                <p>(Biografia será adicionada em breve)</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-spotify"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div> -->
+        
+  
+    <!-- Video Gallery -->
+    <h2 class="section-title" id="videos">CLIPES EM DESTAQUE</h2>
+    <div class="video-gallery">
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/GGiZR7XFQBE" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Ally feat. OSanntt - "Escoteiro"</h3>
+                    <p>Clipe oficial • 15M visualizações</p>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/uGTvM0vpcXw" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Oanntt - "Inimiga da Timidez"</h3>
+                    <p>Videoclipe • 8.2M visualizações</p>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/DgIfhAenJyc" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>OSanntt- "Ok"</h3>
+                    <p>Clipe oficial • 25M visualizações</p>
+                </div>
+            </div>
+            
+            
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-logo">Mares de Morro</div>
+        <div class="footer-links">
+            <a href="#home">Início</a>
+            <a href="#artists">Artistas</a>
+            <a href="#videos">Clipes</a>
+            <a href="#contact">Contato</a>
+        </div>
+        <div class="social-links-footer">
+            <a href="https://www.instagram.com/md.morro?igsh=MXEwaHpjamY4cnh3bg=="><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-spotify"></i></a>
+            <a href="https://open.spotify.com/intl-pt/artist/7m7WCUhbrCJ0oIQOeSF4rN?si=UYpVfdcbQ7itOzRScwAhBg&nd=1&utm_medium=organic&product=open&%24full_url=https%3A%2F%2Fopen.spotify.com%2Fartist%2F7m7WCUhbrCJ0oIQOeSF4rN%3Fsi%3DUYpVfdcbQ7itOzRScwAhBg&feature=organic&_branch_match_id=1292175954913814057&_branch_referrer=H4sIAAAAAAAAA72N0QqCMBiFn2ZeaqkkBBJlCHWRWFR0Fdvc3HBu499E6qJnz4JeITgXh%2FPxcYT31i2jyFnjJX%2BE2NpQSd1FKwumGajPjWU6QHHKB6XuA6hcfBSUrFFcTvng8GdT008TBi%2Bdn0rWZ9fiLAgU%2B5nZ1RU7lSkcUFI6iZLt%2BWYvvKGkzqSvnscTHddi036vsFIE0%2B4Pdyhe6Gai84Az7AdguYEWa0mDFzDOAKRu7wTM6BjkhQDTszcjPwdeMwEAAA%3D%3D"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.youtube.com/@osanntmd"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p class="copyright">© 2023 Mares de Morro. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        const menuLinks = document.querySelectorAll('.mobile-menu a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
